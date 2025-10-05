@@ -1,0 +1,31 @@
+"use client";
+
+import Logo from "./Logo";
+import Navigation from "./Navigation";
+import SearchBar from "./SearchBar";
+import UserMenu from "./UserMenu";
+import MobileMenu from "./MobileMenu";
+
+export default function Header() {
+  return (
+    <header className="bg-white shadow-sm sticky top-0 z-50 border-b border-gray-200">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-[100px]">
+          {/* Logo */}
+          <Logo />
+
+          {/* Desktop Navigation */}
+          <Navigation />
+
+          {/* Right Section: Search & User Menu */}
+          <div className="flex items-center space-x-2">
+            <SearchBar />
+            <UserMenu />
+            <MobileMenu />
+          </div>
+        </div>
+      </div>
+
+    </header>
+  );
+}
