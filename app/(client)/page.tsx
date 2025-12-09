@@ -24,7 +24,7 @@ export default function HomePage() {
   return (
     <Container>
       <HeroCarousel />
-      <MovieList movies={mockMovies} />
+ 
     </Container>
   );
 }
