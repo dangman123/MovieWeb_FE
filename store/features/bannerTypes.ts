@@ -1,3 +1,6 @@
+// src/store/features/banner/bannerTypes.ts
+export type BannerType = "movie" | "promotion" | "event";
+
 export interface Banner {
   BannerID: number;
   Title: string;
@@ -5,11 +8,11 @@ export interface Banner {
   ImageURL: string;
   MobileImageURL: string;
   LinkURL: string;
-  BannerType: "movie" | "promotion" | "event";
+  BannerType: BannerType;
   MovieID: number | null;
   PromotionID: number | null;
   DisplayOrder: number;
-  StartDate: string;
+  StartDate: string; // ISO string
   EndDate: string;
   IsActive: boolean;
   CreatedAt: string;
@@ -25,4 +28,3 @@ export interface BannerApiResponse {
     lastUpdated: string;
   };
 }
-

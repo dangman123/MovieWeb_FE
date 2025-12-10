@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { Banner } from "@/types/banner";
+
 import { bannerService } from "@/services/bannerService";
+import { Banner } from "./bannerTypes";
 
 interface BannerState {
   banners: Banner[];
@@ -63,4 +64,3 @@ const bannerSlice = createSlice({
 
 export const { clearBanners } = bannerSlice.actions;
 export default bannerSlice.reducer;
-

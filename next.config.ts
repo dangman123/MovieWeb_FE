@@ -10,6 +10,16 @@ const nextConfig: NextConfig = {
         hostname: "res.cloudinary.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "cdn.galaxycine.vn",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "www.galaxycine.vn",
+        pathname: "/**",
+      },
     ],
   },
 };
