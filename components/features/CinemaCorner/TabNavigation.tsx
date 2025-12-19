@@ -12,38 +12,39 @@ export default function TabNavigation({
   onTabChange,
 }: TabNavigationProps) {
   return (
-    <div className="flex items-center flex-wrap gap-6 md:gap-8">
-      <div className="hidden md:flex items-center">
-        <span className="border-l-4 border-solid border-orange-500 mr-2"></span>
-        <h1 className="mr-10 text-xl font-bold uppercase not-italic">
+    <div className="flex items-center">
+      <div className="hidden md:block">
+      <span className="border-l-4 border-solid border-[#034ea2] mr-2"></span>
+        <h1 className="mr-10 text-xl font-bold uppercase not-italic inline text-[#4a4a4a]">
           Góc điện ảnh
         </h1>
       </div>
-
-      <ul
-        className="flex mb-0 list-none flex-wrap flex-row gap-6 md:gap-8"
-        role="tablist"
-      >
-        {tabs.map((tab) => (
-          <li
-            key={tab.id}
-            className="-mb-px flex-auto text-center transition-all duration-300 cursor-pointer ease-in-out relative"
-          >
-            <button
-              onClick={() => onTabChange(tab.id)}
-              className={`text-base font-bold not-italic block leading-normal transition-all duration-300 ease-in-out ${
-                activeTab === tab.id
-                  ? "text-orange-500 opacity-100"
-                  : "text-gray-800 hover:text-orange-500 opacity-70"
-              }`}
-              role="tab"
-              aria-selected={activeTab === tab.id}
+      <div className="flex flex-wrap">
+        <ul
+          className="flex mb-0 list-none flex-wrap flex-row"
+          role="tablist"
+        >
+          {tabs.map((tab, index) => (
+            <li
+              key={tab.id}
+              className={`-mb-px mr-6 md:mr-8 last:mr-0 flex-auto text-center transition-all duration-300 cursor-pointer ease-in-out relative`}
             >
-              {tab.label}
-            </button>
-          </li>
-        ))}
-      </ul>
+              <span
+                onClick={() => onTabChange(tab.id)}
+                className={`text-base font-bold not-italic block leading-normal text-[#333333] hover:text-[#0000EE] transition-all duration-300 ease-in-out ${
+                  activeTab === tab.id
+                    ? "text-blue-30 tab__active opacity-100"
+                    : "opacity-50"
+                }`}
+                data-toggle="tab"
+                role="tablist"
+              >
+                {tab.label}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

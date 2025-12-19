@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Star, PlayCircle } from "lucide-react";
-import { Movie } from "@/types/movie";
+import { Movie } from "@/store/features/movieTypes";
 
 interface MovieCardProps {
   movie: Movie;
@@ -45,7 +45,6 @@ export default function MovieCard({ movie }: MovieCardProps) {
             <div className="absolute z-[100] right-1 top-1">
               <img
                 alt="Film Tag"
-                src="/film-tag.png"
                 width={34}
                 height={62}
                 className="object-contain"
@@ -54,15 +53,21 @@ export default function MovieCard({ movie }: MovieCardProps) {
           )}
 
           {/* Movie Poster */}
-          <Image
-            src={movie.poster}
-            alt={movie.title}
-            width={300}
-            height={500}
-            className="w-full h-auto object-cover duration-500 ease-in-out"
-            sizes="(max-width: 640px) 50vw, (max-width: 768px) 50vw, (max-width: 1280px) 25vw, 300px"
-            loading="lazy"
-          />
+          {movie.poster ? (
+            <Image
+              src={movie.poster}
+              alt={movie.title}
+              width={300}
+              height={500}
+              className="w-full h-auto object-cover duration-500 ease-in-out "
+              sizes="(max-width: 640px) 50vw, (max-width: 768px) 50vw, (max-width: 1280px) 25vw, 300px"
+              loading="lazy"
+            />
+          ) : (
+            <div className="w-full aspect-[3/5] bg-gray-200 flex items-center justify-center">
+              <span className="text-gray-400 text-sm">No Image</span>
+            </div>
+          )}
 
           {/* Rating */}
           <div className="absolute right-[5px] bottom-10">
@@ -86,7 +91,7 @@ export default function MovieCard({ movie }: MovieCardProps) {
 
         {/* Movie Title */}
         <div className="mt-2">
-          <h3 className="text-sm md:text-base font-semibold line-clamp-2 min-h-[2.5rem]">
+          <h3 className="text-black md:text-base font-semibold line-clamp-2 min-h-[2.5rem]">
             {movie.title}
           </h3>
         </div>

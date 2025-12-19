@@ -38,7 +38,7 @@ export default function CinemaCorner({
 
   return (
     <section className="py-8 md:py-12">
-      <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-screen-xl mx-auto ">
         <div className="md:text-center transition-all duration-300">
           {/* Tabs Navigation */}
           <div className="flex items-center w-full justify-between mb-10">

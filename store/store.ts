@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import bannerReducer from "./features/bannerSlice";
+import movieReducer from "./features/movieSlice";
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
       banner: bannerReducer,
+      movie: movieReducer,
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({

@@ -17,6 +17,7 @@ export default {
         "orange-primary": "#f26b38",
         "orange-hover": "#fb9440",
         "blue-10": "#034EA2",
+        "blue-30": "#034EA2",
         "black-10": "#333333",
       },
     },

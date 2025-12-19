@@ -30,7 +30,7 @@ export default function ArticleCard({
           <aside className="descriptions text-left mt-4 md:mt-7">
             <Link
               href={`/binh-luan-phim/${article.slug}/`}
-              className="text-xl font-bold md:hover:text-orange-500 transition-all duration-300 overflow-hidden block"
+              className="text-xl font-bold text-[#333333] md:hover:text-[#0000EE] transition-all duration-300 overflow-hidden block"
             >
               {article.title}
             </Link>
@@ -76,7 +76,7 @@ export default function ArticleCard({
       >
         <Link
           href={`/binh-luan-phim/${article.slug}/`}
-          className="text-sm md:text-base xl:text-lg font-normal md:font-bold hover:text-orange-500 transition-all duration-300 overflow-hidden leading-normal line-clamp-2"
+          className="text-sm md:text-base xl:text-lg font-normal md:font-bold text-[#333333] hover:text-[#0000EE] transition-all duration-300 overflow-hidden leading-normal line-clamp-2"
         >
           {article.title}
         </Link>
