@@ -1,7 +1,9 @@
+import Container from "@/components/ui/Container";
+
 export default function Footer() {
   return (
     <footer className="bg-gray-900 text-white py-6">
-      <div className="container mx-auto text-center px-4 sm:px-6 lg:px-8">
+      <Container className="text-center">
         <p className="text-sm sm:text-base">
           © 2025 Galaxy Cine. All rights reserved.
         </p>
@@ -13,7 +15,7 @@ export default function Footer() {
             Instagram
           </a>
         </div>
-      </div>
+      </Container>
     </footer>
   );
 }

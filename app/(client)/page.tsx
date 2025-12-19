@@ -1,30 +1,43 @@
-import HeroCarousel from "@/components/features/HeroCarousel";
-import MovieList from "@/components/features/MovieList";
-import Container from "@/components/ui/Container";
+"use client";
 
-// Dữ liệu giả lập (trong thực tế, lấy từ API)
-const mockMovies = [
-  {
-    id: "1",
-    title: "Avengers: Endgame",
-    poster: "/images/avengers.jpg",
-    genre: "Hành động, Viễn tưởng",
-    duration: 181,
-  },
-  {
-    id: "2",
-    title: "Nhà Bà Nữ",
-    poster: "/images/nha-ba-nu.jpg",
-    genre: "Hài, Tâm lý",
-    duration: 120,
-  },
-];
+import { useEffect } from "react";
+import CinemaCorner from "@/components/features/CinemaCorner";
+import HeroCarousel from "@/components/features/HeroCarousel";
+import MovieList from "@/components/features/MovieList/MovieList";
+import Container from "@/components/ui/Container";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import {
+  fetchNowShowingMovies,
+  fetchComingSoonMovies,
+  fetchImaxMovies,
+} from "@/store/features/movieSlice";
 
 export default function HomePage() {
+  const dispatch = useAppDispatch();
+  const { nowShowingMovies, comingSoonMovies, imaxMovies, loading } =
+    useAppSelector((state) => state.movie);
+
+  // Fetch movies khi component mount
+  useEffect(() => {
+    dispatch(fetchNowShowingMovies());
+    dispatch(fetchComingSoonMovies());
+    dispatch(fetchImaxMovies());
+  }, [dispatch]);
+
   return (
-    <Container>
-      <HeroCarousel />
-      <MovieList movies={mockMovies} />
-    </Container>
+    <>
+      <Container>
+        <HeroCarousel />
+        <MovieList
+          nowShowingMovies={nowShowingMovies}
+          comingSoonMovies={comingSoonMovies}
+          imaxMovies={imaxMovies}
+        />
+      </Container>
+      <div className="line-default"></div>
+      <Container>
+        <CinemaCorner />
+      </Container>
+    </>
   );
 }

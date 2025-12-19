@@ -24,3 +24,9 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.line-default {
+  display: block;
+  border-bottom: 6px solid #f4f4f4;
+  transform: matrix(1, 0, 0, -1, 0, 0);
+}
