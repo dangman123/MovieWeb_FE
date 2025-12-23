@@ -51,32 +51,15 @@ export default function HeroCarousel() {
     setCurrentIndex((prev) => (prev + 1) % banners.length);
   };
 
-  // Lọc chỉ lấy banners đang active
-  // Tạm thời chỉ lọc theo IsActive, có thể thêm lọc thời gian sau
+
   const activeBanners = banners.filter((banner) => {
     if (!banner.IsActive) return false;
-    
-    // Optional: Lọc theo thời gian hiệu lực (uncomment để bật)
-    // const now = new Date();
-    // const startDate = new Date(banner.StartDate);
-    // const endDate = new Date(banner.EndDate);
-    // return now >= startDate && now <= endDate;
-    
+
     return true;
   });
 
   // Debug: Log để kiểm tra
-  useEffect(() => {
-    if (banners.length > 0) {
-      const active = banners.filter((b) => b.IsActive);
-      console.log("Total banners:", banners.length);
-      console.log("Active banners:", active.length);
-      if (active.length > 0 && active[currentIndex]) {
-        console.log("Current banner:", active[currentIndex]);
-        console.log("Image URL:", active[currentIndex].ImageURL);
-      }
-    }
-  }, [banners, currentIndex]);
+
 
   if (loading) {
     return (

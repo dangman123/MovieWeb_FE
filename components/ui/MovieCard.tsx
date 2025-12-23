@@ -1,13 +1,18 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Star, PlayCircle } from "lucide-react";
 import { Movie } from "@/store/features/movieTypes";
+import TrailerModal from "./TrailerModal";
 
 interface MovieCardProps {
   movie: Movie;
 }
 
 export default function MovieCard({ movie }: MovieCardProps) {
+  const [showTrailer, setShowTrailer] = useState(false);
   return (
     <div className="group">
       <div className="relative overflow-hidden rounded-lg">
@@ -16,23 +21,23 @@ export default function MovieCard({ movie }: MovieCardProps) {
           <div className="hidden xl:flex absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
             <div className="flex flex-col justify-center items-center w-full h-full gap-3">
               <Link
-                href={movie.buyTicketUrl || `/booking/${movie.id}`}
-                className="text-white bg-orange-primary w-[120px] h-[40px] hover:bg-orange-hover rounded text-sm px-5 py-2.5 text-center inline-flex items-center transition-colors duration-300"
+                href={movie.buyTicketUrl || `/dat-ve/${movie.slug}`}
+                className="text-white bg-[#f26b38] w-[120px] h-[40px] hover:bg-[#fb9440] rounded text-sm px-5 py-2.5 text-center inline-flex items-center dark:hover:bg-[#fb9440] dark:focus:ring-[#fb9440]"
               >
-                <svg
-                  aria-hidden="true"
-                  focusable="false"
-                  className="mr-2 w-5 h-5"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
-                </svg>
+                <img
+                  alt="Buy Ticket"
+                  width={20}
+                  height={20}
+                  src="/ticket.svg"
+                  className="mr-2"
+                  style={{ color: "transparent" }}
+                />
                 Mua vé
               </Link>
               <button
                 type="button"
-                className="text-white w-[120px] h-[40px] border border-white hover:bg-orange-hover/80 hover:border-transparent rounded text-sm px-5 py-2.5 text-center inline-flex items-center transition-colors duration-300"
+                onClick={() => setShowTrailer(true)}
+                className="text-white w-[120px] h-[40px] border border-white hover:bg-[#fb9440]/80 hover:border-transparent rounded text-sm px-5 py-2.5 text-center inline-flex items-center dark:hover:bg-[#fb9440] dark:focus:ring-[#fb9440]"
               >
                 <PlayCircle className="mr-2 w-5 h-5" />
                 Trailer
@@ -42,7 +47,7 @@ export default function MovieCard({ movie }: MovieCardProps) {
 
           {/* IMAX Tag */}
           {movie.isImax && (
-            <div className="absolute z-[100] right-1 top-1">
+            <div className="absolute right-1 top-1">
               <img
                 alt="Film Tag"
                 width={34}
@@ -96,6 +101,14 @@ export default function MovieCard({ movie }: MovieCardProps) {
           </h3>
         </div>
       </div>
+
+      {/* Trailer Modal */}
+      <TrailerModal
+        isOpen={showTrailer}
+        onClose={() => setShowTrailer(false)}
+        trailerUrl={movie.trailerUrl}
+        movieTitle={movie.title}
+      />
     </div>
   );
 }

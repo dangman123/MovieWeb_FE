@@ -22,9 +22,9 @@ export default function NowShowingMoviesPage() {
   }, [dispatch]);
 
   const tabs = [
-    { id: "NowShowing" as MovieStatus, label: "Đang chiếu", href: "/phim-dang-chieu" },
-    { id: "ComingSoon" as MovieStatus, label: "Sắp chiếu", href: "/phim-sap-chieu" },
-    { id: "IMAX" as MovieStatus, label: "Phim IMAX", href: "/phim-imax" },
+    { id: "NowShowing" as MovieStatus, label: "Đang chiếu", href: "/phim-dang-chieu/" },
+    { id: "ComingSoon" as MovieStatus, label: "Sắp chiếu", href: "/phim-sap-chieu/" },
+    { id: "IMAX" as MovieStatus, label: "Phim IMAX", href: "/phim-imax/" },
   ];
 
   return (

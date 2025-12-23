@@ -66,7 +66,9 @@ export const fetchNowShowingMovies = createAsyncThunk(
       return { data: response, status: "NowShowing" as const };
     } catch (error) {
       return rejectWithValue(
-        error instanceof Error ? error.message : "Failed to fetch now showing movies"
+        error instanceof Error
+          ? error.message
+          : "Failed to fetch now showing movies"
       );
     }
   }
@@ -78,10 +80,12 @@ export const fetchComingSoonMovies = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await movieService.getComingSoonMovies();
-      return { data: response, status: "ComingSoon" as const };
+      return { data: response, status: "UpComing" as const };
     } catch (error) {
       return rejectWithValue(
-        error instanceof Error ? error.message : "Failed to fetch coming soon movies"
+        error instanceof Error
+          ? error.message
+          : "Failed to fetch coming soon movies"
       );
     }
   }
@@ -93,10 +97,25 @@ export const fetchImaxMovies = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await movieService.getImaxMovies();
-      return { data: response, status: "IMAX" as const };
+      return { data: response };
     } catch (error) {
       return rejectWithValue(
         error instanceof Error ? error.message : "Failed to fetch IMAX movies"
+      );
+    }
+  }
+);
+
+// Async thunk để fetch movie details by slug
+export const fetchMovieDetails = createAsyncThunk(
+  "movie/fetchMovieDetails",
+  async (slug: string, { rejectWithValue }) => {
+    try {
+      const response = await movieService.getMovieDetails(slug);
+      return response;
+    } catch (error) {
+      return rejectWithValue(
+        error instanceof Error ? error.message : "Failed to fetch movie details"
       );
     }
   }
@@ -138,7 +157,9 @@ const movieSlice = createSlice({
       .addCase(fetchMovies.fulfilled, (state, action) => {
         state.loading = false;
         // Transform từ API format sang app format
-        state.movies = (action.payload.data.data || []).map(transformMovieApiToMovie);
+        state.movies = (action.payload.data.data || []).map(
+          transformMovieApiToMovie
+        );
         state.lastUpdated = action.payload.data.meta?.lastUpdated || null;
         state.filters = action.payload.filters || null;
         state.error = null;
@@ -171,7 +192,9 @@ const movieSlice = createSlice({
       })
       .addCase(fetchNowShowingMovies.fulfilled, (state, action) => {
         state.loading = false;
-        state.nowShowingMovies = (action.payload.data.data || []).map(transformMovieApiToMovie);
+        state.nowShowingMovies = (action.payload.data.data || []).map(
+          transformMovieApiToMovie
+        );
         state.lastUpdated = action.payload.data.meta?.lastUpdated || null;
         state.filters = { status: action.payload.status };
         state.error = null;
@@ -188,7 +211,9 @@ const movieSlice = createSlice({
       })
       .addCase(fetchComingSoonMovies.fulfilled, (state, action) => {
         state.loading = false;
-        state.comingSoonMovies = (action.payload.data.data || []).map(transformMovieApiToMovie);
+        state.comingSoonMovies = (action.payload.data.data || []).map(
+          transformMovieApiToMovie
+        );
         state.lastUpdated = action.payload.data.meta?.lastUpdated || null;
         state.filters = { status: action.payload.status };
         state.error = null;
@@ -205,15 +230,32 @@ const movieSlice = createSlice({
       })
       .addCase(fetchImaxMovies.fulfilled, (state, action) => {
         state.loading = false;
-        state.imaxMovies = (action.payload.data.data || []).map(transformMovieApiToMovie);
+        state.imaxMovies = (action.payload.data.data || []).map(
+          transformMovieApiToMovie
+        );
         state.lastUpdated = action.payload.data.meta?.lastUpdated || null;
-        state.filters = { status: action.payload.status };
+
         state.error = null;
       })
       .addCase(fetchImaxMovies.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
         state.imaxMovies = [];
+      })
+      // Fetch movie details by slug
+      .addCase(fetchMovieDetails.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchMovieDetails.fulfilled, (state, action) => {
+        state.loading = false;
+        state.selectedMovie = transformMovieApiToMovie(action.payload.data);
+        state.error = null;
+      })
+      .addCase(fetchMovieDetails.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+        state.selectedMovie = null;
       });
   },
 });

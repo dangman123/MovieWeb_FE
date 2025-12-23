@@ -84,7 +84,7 @@ export default function MovieList({
               <div className="text-center transition-all duration-300">
                 <Link
                   href="/phim-dang-chieu/"
-                  className="text-orange-primary hover:text-white w-40 border border-orange-hover hover:bg-orange-hover transition-all duration-300 focus:ring-1 focus:outline-none focus:ring-orange-hover rounded text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 mb-2 justify-center"
+                  className="text-[#f26b38] hover:text-white w-40 border border-[#fb9440] hover:bg-[#fb9440] transition-all duration-300 focus:ring-1 focus:outline-none focus:ring-[#fb9440] rounded text-sm px-5 py-2.5 text-center inline-flex items-center dark:hover:bg-[#fb9440] dark:focus:ring-[#fb9440] mr-2 mb-2 justify-center"
                 >
                   Xem thêm
                   <ChevronRight className="ml-2 w-4 h-4" />
@@ -103,7 +103,7 @@ export default function MovieList({
               <div className="text-center transition-all duration-300">
                 <Link
                   href="/phim-sap-chieu/"
-                  className="text-orange-primary hover:text-white w-40 border border-orange-hover hover:bg-orange-hover transition-all duration-300 focus:ring-1 focus:outline-none focus:ring-orange-hover rounded text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 mb-2 justify-center"
+                  className="text-[#f26b38] hover:text-white w-40 border border-[#fb9440] hover:bg-[#fb9440] transition-all duration-300 focus:ring-1 focus:outline-none focus:ring-[#fb9440] rounded text-sm px-5 py-2.5 text-center inline-flex items-center dark:hover:bg-[#fb9440] dark:focus:ring-[#fb9440] mr-2 mb-2 justify-center"
                 >
                   Xem thêm
                   <ChevronRight className="ml-2 w-4 h-4" />

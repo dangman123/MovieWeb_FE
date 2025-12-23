@@ -5,7 +5,11 @@ import Link from "next/link";
 import MovieCard from "@/components/ui/MovieCard";
 import Container from "@/components/ui/Container";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { fetchNowShowingMovies, fetchComingSoonMovies, fetchImaxMovies } from "@/store/features/movieSlice";
+import {
+  fetchNowShowingMovies,
+  fetchComingSoonMovies,
+  fetchImaxMovies,
+} from "@/store/features/movieSlice";
 import { MovieStatus } from "@/store/features/movieTypes";
 
 export default function ComingSoonMoviesPage() {
@@ -22,9 +26,17 @@ export default function ComingSoonMoviesPage() {
   }, [dispatch]);
 
   const tabs = [
-    { id: "NowShowing" as MovieStatus, label: "Đang chiếu", href: "/phim-dang-chieu" },
-    { id: "ComingSoon" as MovieStatus, label: "Sắp chiếu", href: "/phim-sap-chieu" },
-    { id: "IMAX" as MovieStatus, label: "Phim IMAX", href: "/phim-imax" },
+    {
+      id: "NowShowing" as MovieStatus,
+      label: "Đang chiếu",
+      href: "/phim-dang-chieu/",
+    },
+    {
+      id: "ComingSoon" as MovieStatus,
+      label: "Sắp chiếu",
+      href: "/phim-sap-chieu/",
+    },
+    { id: "IMAX" as MovieStatus, label: "Phim IMAX", href: "/phim-imax/" },
   ];
 
   return (
@@ -92,7 +104,7 @@ export default function ComingSoonMoviesPage() {
         {!loading && !error && (
           <>
             {comingSoonMovies.length > 0 ? (
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-6">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-4 gap-6">
                 {comingSoonMovies.map((movie) => (
                   <MovieCard key={movie.id} movie={movie} />
                 ))}

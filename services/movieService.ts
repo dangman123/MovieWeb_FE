@@ -1,4 +1,8 @@
-import { MovieApiResponse, MovieDetailApiResponse, MovieFilters } from "@/store/features/movieTypes";
+import {
+  MovieApiResponse,
+  MovieDetailApiResponse,
+  MovieFilters,
+} from "@/store/features/movieTypes";
 
 const API_BASE_URL = "http://localhost:8080/api/v1";
 
@@ -6,7 +10,7 @@ export const movieService = {
   async getMovies(filters?: MovieFilters): Promise<MovieApiResponse> {
     try {
       const queryParams = new URLSearchParams();
-      
+
       if (filters?.status) {
         // Status đã là PascalCase, dùng trực tiếp
         queryParams.append("status", filters.status);
@@ -24,7 +28,9 @@ export const movieService = {
         queryParams.append("offset", filters.offset.toString());
       }
 
-      const url = `${API_BASE_URL}/movies${queryParams.toString() ? `?${queryParams.toString()}` : ""}`;
+      const url = `${API_BASE_URL}/movies${
+        queryParams.toString() ? `?${queryParams.toString()}` : ""
+      }`;
 
       const response = await fetch(url, {
         method: "GET",
@@ -79,7 +85,9 @@ export const movieService = {
       });
 
       if (!response.ok) {
-        throw new Error(`Failed to fetch now showing movies: ${response.statusText}`);
+        throw new Error(
+          `Failed to fetch now showing movies: ${response.statusText}`
+        );
       }
 
       const data: MovieApiResponse = await response.json();
@@ -92,7 +100,7 @@ export const movieService = {
 
   async getComingSoonMovies(): Promise<MovieApiResponse> {
     try {
-      const response = await fetch(`${API_BASE_URL}/movies/coming-soon`, {
+      const response = await fetch(`${API_BASE_URL}/movies/comming`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -101,7 +109,9 @@ export const movieService = {
       });
 
       if (!response.ok) {
-        throw new Error(`Failed to fetch coming soon movies: ${response.statusText}`);
+        throw new Error(
+          `Failed to fetch coming soon movies: ${response.statusText}`
+        );
       }
 
       const data: MovieApiResponse = await response.json();
@@ -114,7 +124,7 @@ export const movieService = {
 
   async getImaxMovies(): Promise<MovieApiResponse> {
     try {
-      const response = await fetch(`${API_BASE_URL}/movies/imax`, {
+      const response = await fetch(`${API_BASE_URL}/movies/movie-imax`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -130,6 +140,29 @@ export const movieService = {
       return data;
     } catch (error) {
       console.error("Error fetching IMAX movies:", error);
+      throw error;
+    }
+  },
+  async getMovieDetails(slug: string): Promise<MovieDetailApiResponse> {
+    try {
+      const response = await fetch(`${API_BASE_URL}/movies/${slug}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        cache: "no-store",
+      });
+
+      if (!response.ok) {
+        throw new Error(
+          `Failed to fetch movie details: ${response.statusText}`
+        );
+      }
+
+      const data: MovieDetailApiResponse = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Error fetching movie details:", error);
       throw error;
     }
   },
